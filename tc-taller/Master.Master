@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="tc_taller.Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Taller Mecánico</title>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+          crossorigin="anonymous">
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">🔧 Taller Mecánico</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Default.aspx">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Clientes/Listado.aspx">Clientes</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                Administración
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/Admin/TiposServicio.aspx">Tipos de Servicio</a></li>
+                                <li><a class="dropdown-item" href="/Admin/MarcasRepuesto.aspx">Marcas de Repuesto</a></li>
+                                <li><a class="dropdown-item" href="/Admin/CategoriasRepuesto.aspx">Categorías de Repuesto</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/Admin/Servicios.aspx">Servicios</a></li>
+                                <li><a class="dropdown-item" href="/Admin/Repuestos.aspx">Repuestos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex">
+                    <asp:Label ID="lblUsuario" runat="server" CssClass="text-light m-auto me-3" />
+                    <asp:Button ID="btnSalir" runat="server" Text="Salir" 
+                                CssClass="btn btn-outline-light" OnClick="btnSalir_Click" 
+                                Visible="false" />
+                    <a href="/Login.aspx" id="linkLogin" runat="server" 
+                       class="btn btn-success">Login</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-4">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" 
+            crossorigin="anonymous"></script>
+</body>
+</html>
