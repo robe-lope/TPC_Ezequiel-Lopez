@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,22 @@ namespace tc_taller
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                var usuario = (Usuario)Session["usuario"];
+                lblUsuario.Text = $"👤 {usuario.NombreCompleto} ({usuario.Perfil.Descripcion})";
+                btnSalir.Visible = true;
+                linkLogin.Visible = false;
+                string perfil = usuario.Perfil.Descripcion;
+                if (perfil == "Mecanico") menuAdmin.Visible = false;
+                if (perfil == "Supervisor") menuUsuarios.Visible = false;
+            }
         }
 
         protected void btnSalir_Click(object sender, EventArgs e)
