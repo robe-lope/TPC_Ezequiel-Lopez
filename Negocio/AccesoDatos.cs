@@ -55,5 +55,25 @@ namespace Negocio
             if (lector != null) lector.Close();
             conexion.Close();
         }
+
+        public int EjecutarAccionScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void SetearProcedimiento(string sp)
+        {
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandText = sp;
+
+        }
     }
 }
