@@ -43,7 +43,10 @@
   <ItemGroup>
     <Compile Include="CategoriaRepuesto.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="EstadoOT.cs" />
+    <Compile Include="LineaOT.cs" />
     <Compile Include="MarcaRepuesto.cs" />
+    <Compile Include="OrdenTrabajo.cs" />
     <Compile Include="Repuesto.cs" />
     <Compile Include="Servicio.cs" />
     <Compile Include="TipoServicio.cs" />

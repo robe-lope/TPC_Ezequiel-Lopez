@@ -92,14 +92,18 @@
             <asp:BoundField DataField="StockMinimo" HeaderText="Stock Mín." />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
-                    <asp:Button runat="server" Text="Editar" CssClass="btn btn-sm btn-warning"
+                    <asp:LinkButton runat="server" CssClass="btn btn-sm btn-warning"
                         CommandArgument='<%# Eval("IdRepuesto") %>'
-                        OnClick="btnEditar_Click" CausesValidation="false" />
-                    <asp:Button runat="server" Text="Eliminar" CssClass="btn btn-sm btn-danger"
+                        OnClick="btnEditar_Click" CausesValidation="false">
+                        <i class="bi bi-pencil"></i>
+                    </asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="btn btn-sm btn-danger"
                         CommandArgument='<%# Eval("IdRepuesto") %>'
                         OnClick="btnEliminar_Click" CausesValidation="false"
-                        OnClientClick="return confirm('¿Eliminar este repuesto?');" />
-                </ItemTemplate>
+                        OnClientClick="return confirm('¿Eliminar este repuesto?');">
+                        <i class="bi bi-trash"></i>
+                    </asp:LinkButton>
+</ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>

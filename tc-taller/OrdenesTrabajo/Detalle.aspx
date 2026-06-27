@@ -100,6 +100,17 @@
             <asp:BoundField DataField="Cantidad"       HeaderText="Cantidad" />
             <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unit." DataFormatString="{0:C}" />
             <asp:BoundField DataField="Subtotal"       HeaderText="Subtotal" DataFormatString="{0:C}" />
+            <asp:TemplateField HeaderText="Acciones">
+            <ItemTemplate>
+                <asp:LinkButton runat="server" CssClass="btn btn-sm btn-danger"
+                    CommandArgument='<%# Eval("IdLinea") %>'
+                    OnClick="btnEliminarLinea_Click" CausesValidation="false"
+                    Visible='<%# panelLinea.Visible %>'
+                    OnClientClick="return confirm('¿Eliminar esta linea?');">
+                    <i class="bi bi-trash"></i>
+                </asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>
         </Columns>
     </asp:GridView>
 

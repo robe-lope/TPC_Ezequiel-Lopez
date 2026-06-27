@@ -25,8 +25,12 @@ namespace tc_taller
                 btnSalir.Visible = true;
                 linkLogin.Visible = false;
                 string perfil = usuario.Perfil.Descripcion;
-                if (perfil == "Mecanico") menuAdmin.Visible = false;
-                if (perfil == "Supervisor") menuUsuarios.Visible = false;
+                if (perfil == "Mecanico")
+                {
+                    menuUsuarios.Visible = false;
+                    menuAdmin.Visible = false;
+                }
+                if (perfil == "Administracion") menuUsuarios.Visible = false;
             }
         }
 

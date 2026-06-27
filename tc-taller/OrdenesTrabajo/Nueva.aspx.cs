@@ -14,7 +14,7 @@ namespace tc_taller.OrdenesTrabajo
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Negocio.Seguridad.EsMecanico())
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect("~/OrdenesTrabajo/Listado.aspx");
 
             if (!IsPostBack)
             {
@@ -83,6 +83,13 @@ namespace tc_taller.OrdenesTrabajo
 
             var negocio = new OrdenDeTrabajoNegocio();
             int idOrden = negocio.agregar(ot);
+
+            var otCompleta = negocio.getById(idOrden);
+            if (otCompleta != null)
+            {
+                var mail = new MailNegocio();
+                mail.EnviarMailOTCreada(otCompleta.Vehiculo.Cliente.Email, otCompleta.Vehiculo.Cliente.Nombre, idOrden, ot.Descripcion);
+            }
 
             Response.Redirect("Detalle.aspx?id=" + idOrden);
         }

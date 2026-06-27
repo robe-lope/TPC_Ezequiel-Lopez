@@ -31,13 +31,17 @@
             <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
-                    <asp:Button runat="server" Text="Editar" CssClass="btn btn-sm btn-warning"
+                    <asp:LinkButton runat="server" CssClass="btn btn-sm btn-warning"
                         CommandArgument='<%# Eval("IdCategoria") %>'
-                        OnClick="btnEditar_Click" CausesValidation="false" />
-                    <asp:Button runat="server" Text="Eliminar" CssClass="btn btn-sm btn-danger"
+                        OnClick="btnEditar_Click" CausesValidation="false">
+                        <i class="bi bi-pencil"></i>
+                    </asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="btn btn-sm btn-danger"
                         CommandArgument='<%# Eval("IdCategoria") %>'
                         OnClick="btnEliminar_Click" CausesValidation="false"
-                        OnClientClick="return confirm('¿Eliminar esta categoría?');" />
+                        OnClientClick="return confirm('¿Eliminar esta categoría?');">
+                        <i class="bi bi-trash"></i>
+                    </asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

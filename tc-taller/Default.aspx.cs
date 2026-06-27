@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +13,14 @@ namespace tc_taller
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                var usuario = (Usuario)Session["usuario"];
+
+                cardRepuestos.Visible = !Seguridad.EsMecanico();
+                cardServicios.Visible = !Seguridad.EsMecanico();
+                cardUsuarios.Visible = Seguridad.EsSupervisor();
+            }
         }
     }
 }

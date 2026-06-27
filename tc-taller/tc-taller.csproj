@@ -67,22 +67,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\CategoriaRepuesto.aspx" />
+    <Content Include="Admin\CategoriasRepuesto.aspx" />
     <Content Include="Admin\MarcasRepuesto.aspx" />
-    <Content Include="Admin\TipoServicio.aspx" />
+    <Content Include="Admin\Repuestos.aspx" />
+    <Content Include="Admin\Servicios.aspx" />
+    <Content Include="Admin\TiposServicio.aspx" />
+    <Content Include="Admin\Usuarios.aspx" />
     <Content Include="Clientes\Form.aspx" />
     <Content Include="Clientes\Listado.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="OrdenesTrabajo\Detalle.aspx" />
+    <Content Include="OrdenesTrabajo\Listado.aspx" />
+    <Content Include="OrdenesTrabajo\Nueva.aspx" />
+    <Content Include="Vehiculos\Form.aspx" />
+    <Content Include="Vehiculos\Listado.aspx" />
     <Content Include="Web.config" />
     <Content Include="Default.aspx" />
+    <Content Include="Login.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\CategoriaRepuesto.aspx.cs">
-      <DependentUpon>CategoriaRepuesto.aspx</DependentUpon>
+    <Compile Include="Admin\CategoriasRepuesto.aspx.cs">
+      <DependentUpon>CategoriasRepuesto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\CategoriaRepuesto.aspx.designer.cs">
-      <DependentUpon>CategoriaRepuesto.aspx</DependentUpon>
+    <Compile Include="Admin\CategoriasRepuesto.aspx.designer.cs">
+      <DependentUpon>CategoriasRepuesto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\MarcasRepuesto.aspx.cs">
       <DependentUpon>MarcasRepuesto.aspx</DependentUpon>
@@ -91,12 +100,33 @@
     <Compile Include="Admin\MarcasRepuesto.aspx.designer.cs">
       <DependentUpon>MarcasRepuesto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\TipoServicio.aspx.cs">
-      <DependentUpon>TipoServicio.aspx</DependentUpon>
+    <Compile Include="Admin\Repuestos.aspx.cs">
+      <DependentUpon>Repuestos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\TipoServicio.aspx.designer.cs">
-      <DependentUpon>TipoServicio.aspx</DependentUpon>
+    <Compile Include="Admin\Repuestos.aspx.designer.cs">
+      <DependentUpon>Repuestos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Servicios.aspx.cs">
+      <DependentUpon>Servicios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Servicios.aspx.designer.cs">
+      <DependentUpon>Servicios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TiposServicio.aspx.cs">
+      <DependentUpon>TiposServicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TiposServicio.aspx.designer.cs">
+      <DependentUpon>TiposServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clientes\Form.aspx.cs">
       <DependentUpon>Form.aspx</DependentUpon>
@@ -122,6 +152,27 @@
     <Compile Include="Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
+    <Compile Include="OrdenesTrabajo\Detalle.aspx.cs">
+      <DependentUpon>Detalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenesTrabajo\Detalle.aspx.designer.cs">
+      <DependentUpon>Detalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenesTrabajo\Listado.aspx.cs">
+      <DependentUpon>Listado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenesTrabajo\Listado.aspx.designer.cs">
+      <DependentUpon>Listado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenesTrabajo\Nueva.aspx.cs">
+      <DependentUpon>Nueva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenesTrabajo\Nueva.aspx.designer.cs">
+      <DependentUpon>Nueva.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -129,6 +180,27 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehiculos\Form.aspx.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehiculos\Form.aspx.designer.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehiculos\Listado.aspx.cs">
+      <DependentUpon>Listado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehiculos\Listado.aspx.designer.cs">
+      <DependentUpon>Listado.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

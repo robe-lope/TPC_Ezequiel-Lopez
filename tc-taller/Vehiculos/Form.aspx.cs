@@ -16,7 +16,7 @@ namespace tc_taller.Vehiculos
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Negocio.Seguridad.EsMecanico())
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect("~/Vehiculos/Listado.aspx");
 
             if (Request.QueryString["id"] != null)
                 idVehiculo = int.Parse(Request.QueryString["id"]);

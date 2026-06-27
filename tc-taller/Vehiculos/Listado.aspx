@@ -5,7 +5,8 @@
     <div class="row mb-3">
         <div class="col"><h3>Vehículos</h3></div>
         <div class="col text-end">
-            <a href="Form.aspx" class="btn btn-primary">+ Nuevo Vehículo</a>
+            <asp:Button ID="btnNuevo" runat="server" Text="+ Nuevo Vehículo" 
+                CssClass="btn btn-primary" OnClick="btnNuevo_Click" />
         </div>
     </div>
 
@@ -25,11 +26,19 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
-                    <a href='Form.aspx?id=<%# Eval("IdVehiculo") %>' class="btn btn-sm btn-warning">Editar</a>
-                    <asp:Button runat="server" Text="Eliminar" CssClass="btn btn-sm btn-danger"
+                    <asp:LinkButton runat="server" CssClass="btn btn-sm btn-warning"
+                        CommandArgument='<%# Eval("IdVehiculo") %>'
+                        OnClick="btnEditar_Click" CausesValidation="false"
+                        Visible='<%# !Negocio.Seguridad.EsMecanico() %>'>
+                        <i class="bi bi-pencil"></i
+                    </asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="btn btn-sm btn-danger"
                         CommandArgument='<%# Eval("IdVehiculo") %>'
                         OnClick="btnEliminar_Click" CausesValidation="false"
-                        OnClientClick="return confirm('¿Eliminar este vehículo?');" />
+                        Visible='<%# !Negocio.Seguridad.EsMecanico() %>'>
+                        OnClientClick="return confirm('¿Eliminar este vehículo?');">
+                        <i class="bi bi-trash"></i>
+                    </asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

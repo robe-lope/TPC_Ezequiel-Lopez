@@ -13,6 +13,8 @@ namespace tc_taller.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Negocio.Seguridad.EsMecanico())
+                Response.Redirect("~/Default.aspx");
             if (!IsPostBack)
             {
                 CargarDropDowns();
@@ -69,7 +71,7 @@ namespace tc_taller.Admin
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            var btn = (System.Web.UI.WebControls.Button)sender;
+            var btn = (System.Web.UI.WebControls.LinkButton)sender;
             int id = int.Parse(btn.CommandArgument);
             var negocio = new RepuestoNegocio();
             var repuesto = negocio.Listar().Find(r => r.IdRepuesto == id);
@@ -91,7 +93,7 @@ namespace tc_taller.Admin
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            var btn = (System.Web.UI.WebControls.Button)sender;
+            var btn = (System.Web.UI.WebControls.LinkButton)sender;
             int id = int.Parse(btn.CommandArgument);
             var negocio = new RepuestoNegocio();
             negocio.Eliminar(id);

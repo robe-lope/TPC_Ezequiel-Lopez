@@ -63,6 +63,7 @@ namespace tc_taller.OrdenesTrabajo
                     break;
                 case 4: // Cerrada
                     panelLinea.Visible = false;
+                    btnReabrir.Visible = Seguridad.EsSupervisor();
                     break;
             }
         }
@@ -118,6 +119,30 @@ namespace tc_taller.OrdenesTrabajo
             CargarItemsPorTipo(ddlTipoLinea.SelectedValue);
         }
 
+        protected void ddlItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            decimal precio = 0;
+            if (ddlTipoLinea.SelectedValue == "Servicio")
+            {
+                var negocio = new ServicioNegocio();
+                var lista = negocio.Listar();
+                var servicio = lista.Find(s => s.IdServicio.ToString() == ddlItem.SelectedValue);
+                if (servicio != null)
+                    precio = servicio.PrecioBase;
+            }
+            else
+            {
+                var negocio = new RepuestoNegocio();
+                var lista = negocio.Listar();
+                var repuesto = lista.Find(r => r.IdRepuesto.ToString() == ddlItem.SelectedValue);
+                if (repuesto != null)
+                    precio = repuesto.PrecioVenta;
+            }
+            
+            txtPrecio.Text = precio.ToString();
+        }
+        
+
         protected void btnAgregarLinea_Click(object sender, EventArgs e)
         {
             var linea = new LineaOT();
@@ -133,6 +158,15 @@ namespace tc_taller.OrdenesTrabajo
 
             var negocio = new OrdenDeTrabajoNegocio();
             negocio.agregarLinea(linea);
+            CargarLineas();
+        }
+
+        protected void btnEliminarLinea_Click(object sender, EventArgs e)
+        {
+            var btn = (System.Web.UI.WebControls.LinkButton)sender;
+            int idLinea = int.Parse(btn.CommandArgument);
+            var negocio = new OrdenDeTrabajoNegocio();
+            negocio.eliminarLinea(idLinea);
             CargarLineas();
         }
 
@@ -154,9 +188,25 @@ namespace tc_taller.OrdenesTrabajo
         {
             var negocio = new OrdenDeTrabajoNegocio();
             negocio.cerrar(idOrden);
+           
+            var aux = negocio.getById(idOrden);
+            if(!string.IsNullOrEmpty(aux.Vehiculo.Cliente.Email)) 
+            {
+                var lineas = negocio.listarLineas(idOrden);
+                decimal total = 0;
+                foreach (var l in lineas)
+                    total += l.Subtotal;
+                var mail = new MailNegocio();
+                mail.EnviarMailOTCerrada(aux.Vehiculo.Cliente.Email, aux.Vehiculo.Cliente.Nombre, idOrden, total);
+            }
             Response.Redirect("Detalle.aspx?id=" + idOrden);
         }
-
+        protected void btnReabrir_Click(object sender, EventArgs e)
+        {
+            var negocio = new OrdenDeTrabajoNegocio();
+            negocio.reabrir(idOrden);
+            Response.Redirect("Detalle.aspx?id=" + idOrden);
+        }
         protected string GetBadgeClass(string estado)
         {
             switch (estado)

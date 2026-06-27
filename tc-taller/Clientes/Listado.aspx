@@ -7,7 +7,9 @@
             <h3>Clientes</h3>
         </div>
         <div class="col text-end">
-            <a href="Form.aspx" class="btn btn-primary">+ Nuevo Cliente</a>
+            <asp:Button ID="btnNuevo" runat="server" Text="+ Nuevo Cliente" 
+                CssClass="btn btn-primary" 
+                OnClick="btnNuevo_Click" />
         </div>
     </div>
 
@@ -25,11 +27,21 @@
             <asp:BoundField DataField="Email"     HeaderText="Email" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
-                    <a href='Form.aspx?id=<%# Eval("IdCliente") %>' class="btn btn-sm btn-warning">Editar</a>
-                    <asp:Button runat="server" Text="Eliminar" CssClass="btn btn-sm btn-danger"
+                    <asp:LinkButton runat="server"
+                        
                         CommandArgument='<%# Eval("IdCliente") %>'
-                        OnClick="btnEliminar_Click"
-                        OnClientClick="return confirm('¿Eliminar este cliente?');" />
+                        OnClick="btnEditar_Click" CausesValidation="false"
+                        CssClass="btn btn-sm btn-warning"
+                        Visible='<%# !Negocio.Seguridad.EsMecanico() %>'>
+                        <i class="bi bi-pencil"></i>
+                    </asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="btn btn-sm btn-danger"
+                        CommandArgument='<%# Eval("IdCliente") %>'
+                        OnClick="btnEliminar_Click" CausesValidation="false"
+                        Visible='<%# !Negocio.Seguridad.EsMecanico() %>'
+                        OnClientClick="return confirm('¿Eliminar este cliente?');">
+                        <i class="bi bi-trash"></i>
+                    </asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

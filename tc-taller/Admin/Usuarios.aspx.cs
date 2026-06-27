@@ -62,7 +62,7 @@ namespace tc_taller.Admin
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            var btn = (System.Web.UI.WebControls.Button)sender;
+            var btn = (System.Web.UI.WebControls.LinkButton)sender;
             int id = int.Parse(btn.CommandArgument);
             var negocio = new UsuarioNegocio();
             var usuario = negocio.Listar().Find(u => u.IdUsuario == id);
@@ -81,7 +81,7 @@ namespace tc_taller.Admin
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            var btn = (System.Web.UI.WebControls.Button)sender;
+            var btn = (System.Web.UI.WebControls.LinkButton)sender;
             int id = int.Parse(btn.CommandArgument);
             var negocio = new UsuarioNegocio();
             negocio.Eliminar(id);

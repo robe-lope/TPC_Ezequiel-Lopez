@@ -15,6 +15,9 @@ namespace tc_taller.Clientes
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Negocio.Seguridad.EsMecanico())
+                Response.Redirect("~/Clientes/Listado.aspx");
+
             if (Request.QueryString["id"] != null)
                 idCliente = int.Parse(Request.QueryString["id"]);
 
