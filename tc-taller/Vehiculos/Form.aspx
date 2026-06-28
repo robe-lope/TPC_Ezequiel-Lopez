@@ -20,6 +20,10 @@
             <asp:TextBox ID="txtPatente" runat="server" CssClass="form-control" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPatente"
                 ErrorMessage="La patente es requerida." CssClass="text-danger" Display="Dynamic" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPatente"
+                ValidationExpression="^([A-Za-z]{3}\d{3}|[A-Za-z]{2}\d{3}[A-Za-z]{2})$"
+                ErrorMessage="Formato inválido. Ej: ABC123 o AB123CD" 
+                CssClass="text-danger" Display="Dynamic" />
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -41,6 +45,9 @@
                 <asp:TextBox ID="txtAnio" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAnio"
                     ErrorMessage="El año es requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:CompareValidator runat="server" ControlToValidate="txtAnio"
+                    Operator="DataTypeCheck" Type="Integer"
+                    ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label">Color</label>
@@ -51,6 +58,9 @@
                 <asp:TextBox ID="txtKilometraje" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtKilometraje"
                     ErrorMessage="El kilometraje es requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:CompareValidator runat="server" ControlToValidate="txtKilometraje"
+                    Operator="DataTypeCheck" Type="Integer"
+                    ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
             </div>
         </div>
         <div class="d-flex gap-2">

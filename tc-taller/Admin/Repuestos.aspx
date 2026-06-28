@@ -39,24 +39,37 @@
                 <asp:TextBox ID="txtPrecioCompra" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPrecioCompra"
                     ErrorMessage="Requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:CompareValidator runat="server" ControlToValidate="txtPrecioCompra"
+                    Operator="DataTypeCheck" Type="Double"
+                    ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="col-md-3 mb-3">
                 <label class="form-label">Precio Venta *</label>
                 <asp:TextBox ID="txtPrecioVenta" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPrecioVenta"
                     ErrorMessage="Requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:CompareValidator runat="server" ControlToValidate="txtPrecioVenta"
+                    Operator="DataTypeCheck" Type="Double"
+                    ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="col-md-3 mb-3">
                 <label class="form-label">Stock Actual *</label>
                 <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtStockActual"
                     ErrorMessage="Requerido." CssClass="text-danger" Display="Dynamic" />
+                     <asp:CompareValidator runat="server" ControlToValidate="txtStockActual"
+                     Operator="DataTypeCheck" Type="Integer"
+                     ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
+
             </div>
             <div class="col-md-3 mb-3">
                 <label class="form-label">Stock Mínimo *</label>
                 <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtStockMinimo"
                     ErrorMessage="Requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:CompareValidator runat="server" ControlToValidate="txtStockMinimo"
+                    Operator="DataTypeCheck" Type="Integer"
+                    ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
             </div>
         </div>
         <div class="d-flex gap-2">

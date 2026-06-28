@@ -30,10 +30,20 @@
         <div class="mb-3">
             <label class="form-label">Teléfono</label>
             <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtTelefono"
+                ValidationExpression="^[\d\s\-\+\(\)]{8,15}$"
+                ErrorMessage="Formato de teléfono inválido. Ej: 1154321234" 
+                CssClass="text-danger" Display="Dynamic" />
         </div>
         <div class="mb-3">
             <label class="form-label">Email</label>
             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail"
+                 ErrorMessage="El email es requerido." CssClass="text-danger" Display="Dynamic" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail"
+                ValidationExpression="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                ErrorMessage="Formato de email inválido." 
+                CssClass="text-danger" Display="Dynamic" />
         </div>
         <div class="mb-3">
             <label class="form-label">Dirección</label>

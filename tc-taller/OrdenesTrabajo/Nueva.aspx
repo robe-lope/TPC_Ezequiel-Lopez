@@ -30,6 +30,9 @@
                 <asp:TextBox ID="txtKilometraje" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtKilometraje"
                     ErrorMessage="El kilometraje es requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:CompareValidator runat="server" ControlToValidate="txtKilometraje"
+                    Operator="DataTypeCheck" Type="Integer"
+                    ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">Fecha estimada de entrega</label>

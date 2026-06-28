@@ -20,6 +20,9 @@
             <asp:TextBox ID="txtPrecioBase" runat="server" CssClass="form-control" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPrecioBase"
                 ErrorMessage="El precio es requerido." CssClass="text-danger" Display="Dynamic" />
+            <asp:CompareValidator runat="server" ControlToValidate="txtPrecioBase"
+                Operator="DataTypeCheck" Type="Double"
+                ErrorMessage="Debe ser un número." CssClass="text-danger" Display="Dynamic" />
         </div>
         <div class="mb-3">
             <label class="form-label">Tipo de Servicio *</label>
