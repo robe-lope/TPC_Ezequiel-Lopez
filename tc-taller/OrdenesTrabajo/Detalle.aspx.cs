@@ -29,7 +29,7 @@ namespace tc_taller.OrdenesTrabajo
         private void CargarOT()
         {
             var negocio = new OrdenDeTrabajoNegocio();
-            var ot = negocio.getById(idOrden);
+            var ot = negocio.GetById(idOrden);
             if (ot == null) { Response.Redirect("Listado.aspx"); return; }
 
             lblIdOrden.Text = ot.IdOrden.ToString();
@@ -106,7 +106,7 @@ namespace tc_taller.OrdenesTrabajo
         private void CargarLineas()
         {
             var negocio = new OrdenDeTrabajoNegocio();
-            var lineas = negocio.listarLineas(idOrden);
+            var lineas = negocio.ListarLineas(idOrden);
             gvLineas.DataSource = lineas;
             gvLineas.DataBind();
 
@@ -157,7 +157,7 @@ namespace tc_taller.OrdenesTrabajo
                 linea.Repuesto = new Repuesto { IdRepuesto = int.Parse(ddlItem.SelectedValue) };
 
             var negocio = new OrdenDeTrabajoNegocio();
-            negocio.agregarLinea(linea);
+            negocio.AgregarLinea(linea);
             CargarLineas();
         }
 
@@ -166,33 +166,33 @@ namespace tc_taller.OrdenesTrabajo
             var btn = (System.Web.UI.WebControls.LinkButton)sender;
             int idLinea = int.Parse(btn.CommandArgument);
             var negocio = new OrdenDeTrabajoNegocio();
-            negocio.eliminarLinea(idLinea);
+            negocio.EliminarLinea(idLinea);
             CargarLineas();
         }
 
         protected void btnEnProceso_Click(object sender, EventArgs e)
         {
             var negocio = new OrdenDeTrabajoNegocio();
-            negocio.cambiarEstado(idOrden, 2);
+            negocio.CambiarEstado(idOrden, 2);
             Response.Redirect("Detalle.aspx?id=" + idOrden);
         }
 
         protected void btnResolver_Click(object sender, EventArgs e)
         {
             var negocio = new OrdenDeTrabajoNegocio();
-            negocio.cambiarEstado(idOrden, 3);
+            negocio.CambiarEstado(idOrden, 3);
             Response.Redirect("Detalle.aspx?id=" + idOrden);
         }
 
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
             var negocio = new OrdenDeTrabajoNegocio();
-            negocio.cerrar(idOrden);
+            negocio.Cerrar(idOrden);
            
-            var aux = negocio.getById(idOrden);
+            var aux = negocio.GetById(idOrden);
             if(!string.IsNullOrEmpty(aux.Vehiculo.Cliente.Email)) 
             {
-                var lineas = negocio.listarLineas(idOrden);
+                var lineas = negocio.ListarLineas(idOrden);
                 decimal total = 0;
                 foreach (var l in lineas)
                     total += l.Subtotal;
@@ -204,7 +204,7 @@ namespace tc_taller.OrdenesTrabajo
         protected void btnReabrir_Click(object sender, EventArgs e)
         {
             var negocio = new OrdenDeTrabajoNegocio();
-            negocio.reabrir(idOrden);
+            negocio.Reabrir(idOrden);
             Response.Redirect("Detalle.aspx?id=" + idOrden);
         }
         protected string GetBadgeClass(string estado)

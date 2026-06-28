@@ -23,16 +23,21 @@ namespace tc_taller.OrdenesTrabajo
                 CargarGrilla();
         }
 
-        private void CargarGrilla()
+        private void CargarGrilla(int idEstado = 0)
         {
             var negocio = new OrdenDeTrabajoNegocio();
             var usuario = (Usuario)Session["usuario"];
-
-            if (usuario.Perfil.Descripcion == "Mecanico")
-                gvOTs.DataSource = negocio.listarPorMecanico(usuario.IdUsuario);
+            if (idEstado > 0)
+            {
+                gvOTs.DataSource = negocio.Filtrar(idEstado);
+            }
             else
-                gvOTs.DataSource = negocio.listar();
-
+            {
+                if (usuario.Perfil.Descripcion == "Mecanico")
+                    gvOTs.DataSource = negocio.ListarPorMecanico(usuario.IdUsuario);
+                else
+                    gvOTs.DataSource = negocio.Listar();
+            }
             gvOTs.DataBind();
         }
 
@@ -46,6 +51,17 @@ namespace tc_taller.OrdenesTrabajo
                 case "Cerrada": return "badge bg-success";
                 default: return "badge bg-secondary";
             }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarGrilla(int.Parse(ddlEstado.SelectedValue));
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            ddlEstado.SelectedIndex = 0;
+            CargarGrilla();
         }
     }
 }

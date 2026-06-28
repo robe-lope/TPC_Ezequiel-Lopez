@@ -82,9 +82,9 @@ namespace tc_taller.OrdenesTrabajo
                 ot.FechaEstimada = DateTime.Parse(txtFechaEstimada.Text);
 
             var negocio = new OrdenDeTrabajoNegocio();
-            int idOrden = negocio.agregar(ot);
+            int idOrden = negocio.Agregar(ot);
 
-            var otCompleta = negocio.getById(idOrden);
+            var otCompleta = negocio.GetById(idOrden);
             if (otCompleta != null)
             {
                 var mail = new MailNegocio();

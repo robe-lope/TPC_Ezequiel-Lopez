@@ -19,7 +19,8 @@ namespace Negocio
                                        FROM Repuestos r
                                        INNER JOIN MarcasRepuesto m ON r.IdMarca = m.IdMarca
                                        INNER JOIN CategoriasRepuesto c ON r.IdCategoria = c.IdCategoria
-                                       WHERE r.Activo = 1");
+                                       WHERE r.Activo = 1
+                                       ORDER BY r.Descripcion ASC");
                 datos.EjecutarLectura();
                 while (datos.Lector.Read())
                 {

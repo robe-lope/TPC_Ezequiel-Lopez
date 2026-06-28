@@ -25,10 +25,14 @@ namespace tc_taller.Clientes
             }
         }
 
-        private void CargarClientes()
+        private void CargarClientes(string busqueda = "")
         {
             var negocio = new ClienteNegocio();
-            gvClientes.DataSource = negocio.Listar();
+            if(string.IsNullOrEmpty(busqueda)) {
+                gvClientes.DataSource = negocio.Listar();
+            } else {
+                gvClientes.DataSource = negocio.Buscar(busqueda);
+            }
             gvClientes.DataBind();
         }
 
@@ -48,6 +52,21 @@ namespace tc_taller.Clientes
         {
             var btn = (System.Web.UI.WebControls.LinkButton)sender;
             Response.Redirect("Form.aspx?id=" + btn.CommandArgument);
+        }
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarClientes(txtBusqueda.Text.Trim());
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBusqueda.Text = "";
+            CargarClientes();
+        }
+
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            CargarClientes(txtBusqueda.Text.Trim());
         }
     }
 }

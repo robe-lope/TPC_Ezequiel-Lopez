@@ -35,7 +35,7 @@
                     <asp:LinkButton runat="server" CssClass="btn btn-sm btn-danger"
                         CommandArgument='<%# Eval("IdVehiculo") %>'
                         OnClick="btnEliminar_Click" CausesValidation="false"
-                        Visible='<%# !Negocio.Seguridad.EsMecanico() %>'>
+                        Visible='<%# !Negocio.Seguridad.EsMecanico() %>'
                         OnClientClick="return confirm('¿Eliminar este vehículo?');">
                         <i class="bi bi-trash"></i>
                     </asp:LinkButton>

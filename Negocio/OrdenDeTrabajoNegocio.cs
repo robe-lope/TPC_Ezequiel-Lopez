@@ -1,15 +1,12 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Negocio
 {
     public class OrdenDeTrabajoNegocio
     {
-        public List<OrdenDeTrabajo> listar()
+        public List<OrdenDeTrabajo> Listar()
         {
             List<OrdenDeTrabajo> lista = new List<OrdenDeTrabajo>();
             AccesoDatos datos = new AccesoDatos();
@@ -36,7 +33,7 @@ namespace Negocio
             finally { datos.CerrarConexion(); }
         }
 
-        public List<OrdenDeTrabajo> listarPorMecanico(int idMecanico)
+        public List<OrdenDeTrabajo> ListarPorMecanico(int idMecanico)
         {
             List<OrdenDeTrabajo> lista = new List<OrdenDeTrabajo>();
             AccesoDatos datos = new AccesoDatos();
@@ -65,7 +62,7 @@ namespace Negocio
             finally { datos.CerrarConexion(); }
         }
 
-        public OrdenDeTrabajo getById(int idOrden)
+        public OrdenDeTrabajo GetById(int idOrden)
         {
             OrdenDeTrabajo ot = null;
             AccesoDatos datos = new AccesoDatos();
@@ -93,7 +90,7 @@ namespace Negocio
             finally { datos.CerrarConexion(); }
         }
 
-        public int agregar(OrdenDeTrabajo ot)
+        public int Agregar(OrdenDeTrabajo ot)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -117,7 +114,7 @@ namespace Negocio
             finally { datos.CerrarConexion(); }
         }
 
-        public void cambiarEstado(int idOrden, int idEstado)
+        public void CambiarEstado(int idOrden, int idEstado)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -130,7 +127,7 @@ namespace Negocio
             catch (Exception ex) { throw ex; }
             finally { datos.CerrarConexion(); }
         }
-        public void reabrir(int idOrden)
+        public void Reabrir(int idOrden)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -145,7 +142,7 @@ namespace Negocio
             finally { datos.CerrarConexion(); }
         }
 
-        public void cerrar(int idOrden)
+        public void Cerrar(int idOrden)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -161,7 +158,7 @@ namespace Negocio
             finally { datos.CerrarConexion(); }
         }
 
-        public void agregarLinea(LineaOT linea)
+        public void AgregarLinea(LineaOT linea)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -191,7 +188,7 @@ namespace Negocio
             catch (Exception ex) { throw ex; }
             finally { datos.CerrarConexion(); }
         }
-        public void eliminarLinea(int idLinea)
+        public void EliminarLinea(int idLinea)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -204,7 +201,7 @@ namespace Negocio
             finally { datos.CerrarConexion(); }
         }
 
-        public List<LineaOT> listarLineas(int idOrden)
+        public List<LineaOT> ListarLineas(int idOrden)
         {
             List<LineaOT> lista = new List<LineaOT>();
             AccesoDatos datos = new AccesoDatos();
@@ -284,6 +281,34 @@ namespace Negocio
                 Apellido = (string)datos.Lector["ApellidoMecanico"]
             };
             return ot;
+        }
+        public List<OrdenDeTrabajo> Filtrar(int idEstado)
+        {
+            List<OrdenDeTrabajo> lista = new List<OrdenDeTrabajo>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta(@"
+            SELECT o.*, 
+                   e.Descripcion AS DescEstado,
+                   v.Patente, v.Marca AS MarcaVehiculo, v.Modelo,
+                   c.Nombre AS NombreCliente, c.Apellido AS ApellidoCliente, c.Email AS EmailCliente,
+                   m.Nombre AS NombreMecanico, m.Apellido AS ApellidoMecanico
+            FROM OrdenesDeTrabajo o
+            INNER JOIN EstadosOT e ON o.IdEstado = e.IdEstado
+            INNER JOIN Vehiculos v ON o.IdVehiculo = v.IdVehiculo
+            INNER JOIN Clientes c ON v.IdCliente = c.IdCliente
+            INNER JOIN Usuarios m ON o.IdMecanico = m.IdUsuario
+            WHERE o.IdEstado = @idEstado
+            ORDER BY o.FechaIngreso DESC");
+                datos.SetearParametro("@idEstado", idEstado);
+                datos.EjecutarLectura();
+                while (datos.Lector.Read())
+                    lista.Add(MapearOT(datos));
+                return lista;
+            }
+            catch (Exception ex) { throw ex; }
+            finally { datos.CerrarConexion(); }
         }
     }
 }

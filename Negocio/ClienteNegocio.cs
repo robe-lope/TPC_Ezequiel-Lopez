@@ -136,6 +136,38 @@ namespace Negocio
             }
         }
 
-       
+        public List<Cliente> Buscar(string busqueda)
+        {
+            List<Cliente> lista = new List<Cliente>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta(@"SELECT * FROM Clientes 
+                               WHERE Activo = 1 AND (
+                               Nombre    LIKE @busqueda OR 
+                               Apellido  LIKE @busqueda OR 
+                               DNI       LIKE @busqueda)");
+                datos.SetearParametro("@busqueda", "%" + busqueda + "%");
+                datos.EjecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Cliente aux = new Cliente();
+                    aux.IdCliente = (int)datos.Lector["IdCliente"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.DNI = (string)datos.Lector["DNI"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Direccion = (string)datos.Lector["Direccion"];
+                    aux.Activo = (bool)datos.Lector["Activo"];
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex) { throw ex; }
+            finally { datos.CerrarConexion(); }
+        }
+
+
     }
 }
