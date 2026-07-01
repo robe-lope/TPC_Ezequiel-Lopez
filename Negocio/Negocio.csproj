@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="CategoriaRepuestoNegocio.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ClienteNegocio.cs" />
     <Compile Include="MailNegocio.cs" />
     <Compile Include="MarcaRepuestoNegocio.cs" />

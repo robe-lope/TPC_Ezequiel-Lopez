@@ -85,6 +85,87 @@ namespace Negocio
             }
         }
 
+        public Usuario GetByEmail(string email)
+        {
+            Usuario usuario = null;
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta(@"SELECT u.*, p.Descripcion AS DescPerfil 
+                               FROM Usuarios u
+                               INNER JOIN Perfiles p ON u.IdPerfil = p.IdPerfil
+                               WHERE u.Email = @email AND u.Activo = 1");
+                datos.SetearParametro("@email", email);
+                datos.EjecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    usuario = new Usuario();
+                    usuario.IdUsuario = (int)datos.Lector["IdUsuario"];
+                    usuario.Nombre = (string)datos.Lector["Nombre"];
+                    usuario.Apellido = (string)datos.Lector["Apellido"];
+                    usuario.Email = (string)datos.Lector["Email"];
+                    usuario.Username = (string)datos.Lector["Username"];
+                    usuario.Activo = (bool)datos.Lector["Activo"];
+                    usuario.Perfil = new Perfil();
+                    usuario.Perfil.IdPerfil = (int)datos.Lector["IdPerfil"];
+                    usuario.Perfil.Descripcion = (string)datos.Lector["DescPerfil"];
+                }
+                return usuario;
+            }
+            catch (Exception ex) { throw ex; }
+            finally { datos.CerrarConexion(); }
+        }
+
+        public void GuardarToken(int idUsuario, string token, DateTime expiracion)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta(@"UPDATE Usuarios 
+                               SET TokenRecuperacion = @token, TokenExpiracion = @exp 
+                               WHERE IdUsuario = @id");
+                datos.SetearParametro("@token", token);
+                datos.SetearParametro("@exp", expiracion);
+                datos.SetearParametro("@id", idUsuario);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex) { throw ex; }
+            finally { datos.CerrarConexion(); }
+        }
+        public Usuario GetByToken(string token)
+        {
+            Usuario usuario = null;
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta(@"SELECT u.*, p.Descripcion AS DescPerfil 
+                               FROM Usuarios u
+                               INNER JOIN Perfiles p ON u.IdPerfil = p.IdPerfil
+                               WHERE u.TokenRecuperacion = @token 
+                               AND u.TokenExpiracion > @ahora
+                               AND u.Activo = 1");
+                datos.SetearParametro("@token", token);
+                datos.SetearParametro("@ahora", DateTime.Now);
+                datos.EjecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    usuario = new Usuario();
+                    usuario.IdUsuario = (int)datos.Lector["IdUsuario"];
+                    usuario.Nombre = (string)datos.Lector["Nombre"];
+                    usuario.Apellido = (string)datos.Lector["Apellido"];
+                    usuario.Email = (string)datos.Lector["Email"];
+                    usuario.Username = (string)datos.Lector["Username"];
+                    usuario.Activo = (bool)datos.Lector["Activo"];
+                    usuario.Perfil = new Perfil();
+                    usuario.Perfil.IdPerfil = (int)datos.Lector["IdPerfil"];
+                    usuario.Perfil.Descripcion = (string)datos.Lector["DescPerfil"];
+                }
+                return usuario;
+            }
+            catch (Exception ex) { throw ex; }
+            finally { datos.CerrarConexion(); }
+        }
+
         public void Agregar(Usuario u)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -155,6 +236,24 @@ namespace Negocio
             }
         }
 
+        public void ActualizarPassword(int idUsuario, string nuevaPassword)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta(@"UPDATE Usuarios 
+                               SET Password = @pass, 
+                                   TokenRecuperacion = NULL, 
+                                   TokenExpiracion = NULL 
+                               WHERE IdUsuario = @id");
+                datos.SetearParametro("@pass", nuevaPassword);
+                datos.SetearParametro("@id", idUsuario);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex) { throw ex; }
+            finally { datos.CerrarConexion(); }
+        }
+
         public List<Usuario> ListarMecanicos()
         {
             List<Usuario> lista = new List<Usuario>();
@@ -189,6 +288,8 @@ namespace Negocio
             {
                 datos.CerrarConexion();
             }
+
+
         }
     }
 }

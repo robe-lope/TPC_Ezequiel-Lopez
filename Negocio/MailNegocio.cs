@@ -109,5 +109,54 @@ namespace Negocio
                 throw ex;
             }
         }
+
+        public void EnviarMailRecuperacion(string emailCliente, string nombre, string token, string baseUrl)
+        {
+            try
+            {
+                var mensaje = new MailMessage();
+                mensaje.From = new MailAddress(from, "Taller Mecánico");
+                mensaje.To.Add(emailCliente);
+                mensaje.Subject = "Recuperación de contraseña — Taller Mecánico";
+                mensaje.IsBodyHtml = true;
+                mensaje.Body = $@"
+                    <!DOCTYPE html>
+                    <html>
+                    <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
+                        <div style='max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'>
+                            <div style='background-color: #1e2a3a; padding: 24px; text-align: center;'>
+                                <h1 style='color: #ffffff; margin: 0;'>🔧 Taller Mecánico</h1>
+                            </div>
+                            <div style='padding: 32px;'>
+                                <h2 style='color: #333;'>¡Hola {nombre}!</h2>
+                                <p style='color: #555;'>Recibimos una solicitud para restablecer tu contraseña.</p>
+                                <p style='color: #555;'>Hacé click en el botón para crear una nueva:</p>
+                                <div style='text-align: center; margin: 32px 0;'>
+                                    <a href='{baseUrl}/ResetPass.aspx?token={token}' 
+                                       style='background-color: #2e86de; color: white; padding: 14px 28px; 
+                                              border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px;'>
+                                        Restablecer contraseña
+                                    </a>
+                                </div>
+                                <p style='color: #e74c3c; font-size: 13px;'>⚠️ Este link expira en 1 hora.</p>
+                                <p style='color: #999; font-size: 13px;'>Si no solicitaste este cambio, ignorá este mail.</p>
+                            </div>
+                            <div style='background-color: #f0f0f0; padding: 16px; text-align: center;'>
+                                <p style='color: #999; font-size: 12px; margin: 0;'>Taller Mecánico — Este es un mail automático, no respondas este correo.</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>";
+
+                var smtp = new SmtpClient(host, port);
+                smtp.Credentials = new NetworkCredential(user, pass);
+                smtp.EnableSsl = false;
+                smtp.Send(mensaje);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -15,18 +15,27 @@
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNombre"
                     ErrorMessage="Requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtApellido"
+                    ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$"
+                    ErrorMessage="Solo se permiten letras." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">Apellido *</label>
                 <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtApellido"
                     ErrorMessage="Requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtApellido"
+                    ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$"
+                    ErrorMessage="Solo se permiten letras." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">Email *</label>
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail"
                     ErrorMessage="Requerido." CssClass="text-danger" Display="Dynamic" />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail"
+                    ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                    ErrorMessage="Formato de email inválido." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">Username *</label>

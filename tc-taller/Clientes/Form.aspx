@@ -14,18 +14,27 @@
             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNombre"
                 ErrorMessage="El nombre es requerido." CssClass="text-danger" Display="Dynamic" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtNombre"
+                ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$"
+                ErrorMessage="Solo se permiten letras." CssClass="text-danger" Display="Dynamic" />
         </div>
         <div class="mb-3">
             <label class="form-label">Apellido *</label>
             <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtApellido"
                 ErrorMessage="El apellido es requerido." CssClass="text-danger" Display="Dynamic" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtApellido"
+                ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$"
+                ErrorMessage="Solo se permiten letras." CssClass="text-danger" Display="Dynamic" />
         </div>
         <div class="mb-3">
             <label class="form-label">DNI *</label>
             <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDNI"
                 ErrorMessage="El DNI es requerido." CssClass="text-danger" Display="Dynamic" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtDNI"
+                ValidationExpression="^\d{7,8}$"
+                ErrorMessage="El DNI debe tener 7 u 8 digitos." CssClass="text-danger" Display="Dynamic" />
         </div>
         <div class="mb-3">
             <label class="form-label">Teléfono</label>

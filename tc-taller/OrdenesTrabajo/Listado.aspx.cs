@@ -13,14 +13,16 @@ namespace tc_taller.OrdenesTrabajo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Seguridad.GetUsuarioActual() == null)
+            if (Seguridad.GetUsuarioActual() == null)
             {
                 Response.Redirect("~/Login.aspx");
                 return;
             }
 
             if (!IsPostBack)
+                btnNuevo.Visible = !Seguridad.EsMecanico();
                 CargarGrilla();
+            
         }
 
         private void CargarGrilla(int idEstado = 0)
@@ -62,6 +64,11 @@ namespace tc_taller.OrdenesTrabajo
         {
             ddlEstado.SelectedIndex = 0;
             CargarGrilla();
+        }
+        
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Nueva.aspx");
         }
     }
 }

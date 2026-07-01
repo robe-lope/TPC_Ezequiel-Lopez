@@ -5,7 +5,8 @@
     <div class="row mb-3">
         <div class="col"><h3>Órdenes de Trabajo</h3></div>
         <div class="col text-end">
-            <a href="Nueva.aspx" class="btn btn-primary">+ Nueva OT</a>
+            <asp:Button ID="btnNuevo" runat="server" Text="+ Nueva Orden de Trabajo" 
+                CssClass="btn btn-primary" OnClick="btnNuevo_Click" />
         </div>
     </div>
     <div class="card p-3 mb-4">

@@ -37,6 +37,9 @@
                         </div>
                         <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" 
                             CssClass="btn btn-primary w-100" OnClick="btnIngresar_Click" />
+                        <div class="text-center mt-3">
+                            <a href="OlvideMiPass.aspx" class="text-muted" style="font-size:0.9rem;">¿Olvidaste tu contraseña?</a>
+                        </div>
                     </div>
                 </div>
             </div>
